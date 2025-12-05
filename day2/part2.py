@@ -1,32 +1,30 @@
 import os 
 
-
+import math 
 
 with open(os.path.join(os.path.dirname(__file__), 'input.txt'), 'r') as f:
     data = f.read().split(',')
     ranges = [range.split('-') for range in data]
 
-# What makes a range
-# repearted sequences of numebrs 
-# Brute force: if id[:len(id/2)] == id[len(id/2):] then it is invalid
 
-def build_invalid_id_pattern(id, range_start, range_end): 
-    min_digits = len(str(range_start))
-    max_digits = len(str(range_end))
-    
-    return None
-
-def is_valid_id(id): 
-    # 2121212121
-    
-    
-
+def id_matches_pattern(id: str, pattern: str):
+    for i in range(0, len(id), len(pattern)): 
+        if id[i:i+len(pattern)] != pattern:
+            return False
     return True
+
+
+def is_valid_id(id: str):
+    for i in range(math.ceil(len(id)/2)):
+        if id_matches_pattern(id, id[:i+1]):
+            return True
+    return False
+    
 
 def get_invalid_id_sum_range(start, end): 
     invalid_id_sum = 0
     for i in range(int(start), int(end)+1): 
-        if not is_valid_id(i): 
+        if not is_valid_id((str(i))): 
             invalid_id_sum += i
     return invalid_id_sum
 

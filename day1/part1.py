@@ -5,7 +5,7 @@ dial_start = 50 # Starting position of the dial
 dial_max = 99 
 dial_min = 0
 
-# 1, 2, 3, 4, 5 
+
 with open(os.path.join(os.path.dirname(__file__), 'day1.txt'), 'r') as f:
     data = f.read().splitlines()
     amounts = [int(line[1:]) for line in data]
